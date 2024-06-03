@@ -3,9 +3,6 @@
 #include <ranges>
 #include <algorithm>
 
-inline sf::Vector2f velocity{};
-inline constexpr float velocityBase{ 0.5f };
-
 namespace RTPS {
 
 Application::Application( const WindowConfig& windowConfig )
