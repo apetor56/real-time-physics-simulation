@@ -5,4 +5,5 @@ target_sources(${PROJECT_NAME} PRIVATE
 	main.cpp
 	Application.cpp Application.hpp
 	Shape.cpp Shape.hpp
+	InputHandler.cpp InputHandler.hpp
 )

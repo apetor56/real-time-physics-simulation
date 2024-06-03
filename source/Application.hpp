@@ -1,16 +1,11 @@
 #pragma once
 
 #include "Shape.hpp"
+#include "InputHandler.hpp"
 
 #include "SFML/Graphics.hpp"
 
-#include <chrono>
-#include <vector>
-#include <memory>
-
 namespace RTPS {
-
-using Shapes = std::vector< std::optional< RTPS::Shape > >;
 
 struct WindowConfig {
     const uint32_t width;
@@ -34,10 +29,17 @@ public:
 private:
     sf::RenderWindow m_window;
     RTPS::Shapes m_shapes;
+    RTPS::InputHandler m_inputHandler{};
     size_t m_currentShapeIndex{};
 
-    void update( double deltaTime );
+    void loadObjects();
+
+    void processInput();
+    void update( float deltaTime );
     void render();
+
+    void processWindowEvents();
+    void processShapeSwitch();
 };
 
 } // namespace RTPS
