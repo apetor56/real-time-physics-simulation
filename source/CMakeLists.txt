@@ -6,4 +6,5 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Application.cpp Application.hpp
 	Shape.cpp Shape.hpp
 	InputHandler.cpp InputHandler.hpp
+	Scene.cpp Scene.hpp
 )

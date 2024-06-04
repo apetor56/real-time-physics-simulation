@@ -2,6 +2,7 @@
 
 #include "Shape.hpp"
 #include "InputHandler.hpp"
+#include "Scene.hpp"
 
 #include "SFML/Graphics.hpp"
 
@@ -28,18 +29,14 @@ public:
 
 private:
     sf::RenderWindow m_window;
-    RTPS::Shapes m_shapes;
+    RTPS::Scene m_scene{};
     RTPS::InputHandler m_inputHandler{};
-    size_t m_currentShapeIndex{};
-
-    void loadObjects();
 
     void processInput();
     void update( float deltaTime );
     void render();
 
     void processWindowEvents();
-    void processShapeSwitch();
 };
 
 } // namespace RTPS

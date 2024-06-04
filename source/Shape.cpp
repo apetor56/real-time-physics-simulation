@@ -23,14 +23,25 @@ void Shape::processInput( const InputHandler& inputHandler ) {
     if ( !m_isControlled )
         return;
 
-    if ( inputHandler.isPressed( sf::Keyboard::Key::W ) )
-        m_velocity.y = -s_speed;
-    if ( inputHandler.isPressed( sf::Keyboard::Key::S ) )
-        m_velocity.y = s_speed;
-    if ( inputHandler.isPressed( sf::Keyboard::Key::A ) )
-        m_velocity.x = -s_speed;
-    if ( inputHandler.isPressed( sf::Keyboard::Key::D ) )
-        m_velocity.x = s_speed;
+    const auto& inputs{ inputHandler.getInputTypes() };
+    for ( const auto& inputType : inputs ) {
+        switch ( inputType ) {
+        case RTPS::InputType::MoveUp:
+            m_velocity.y = -s_speed;
+            break;
+        case RTPS::InputType::MoveDown:
+            m_velocity.y = s_speed;
+            break;
+        case RTPS::InputType::MoveLeft:
+            m_velocity.x = -s_speed;
+            break;
+        case RTPS::InputType::MoveRight:
+            m_velocity.x = s_speed;
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void Shape::update( float deltaTime ) {
