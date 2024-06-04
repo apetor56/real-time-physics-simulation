@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Shape.hpp"
+#include "Collision/CollisionDetector.hpp"
 
 namespace sf {
 class RenderWindow;
@@ -19,6 +20,7 @@ public:
 
 private:
     RTPS::Shapes m_shapes;
+    RTPS::CollisionDetector m_collisionDetector{};
 
     void loadShapes();
     void processShapeSwitch( const InputHandler& inputHandler );

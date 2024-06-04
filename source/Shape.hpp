@@ -20,10 +20,15 @@ public:
     void update( float deltaTime );
     void render( sf::RenderWindow& window ) const;
 
+    sf::Vector2f getPoint( size_t index ) const;
+    void move( const sf::Vector2f& offset );
+
     void setControlled( bool controllFlag );
     bool isControlled() const;
+    void printPositions();
 
 private:
+    std::vector< sf::Vector2f > m_vertices{};
     sf::Vector2f m_velocity{};
     bool m_isControlled{ false };
 };

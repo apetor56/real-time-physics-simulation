@@ -1,10 +1,18 @@
 add_executable(${PROJECT_NAME})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
-target_sources(${PROJECT_NAME} PRIVATE
+target_sources(${PROJECT_NAME}
+PRIVATE
 	main.cpp
 	Application.cpp Application.hpp
 	Shape.cpp Shape.hpp
 	InputHandler.cpp InputHandler.hpp
 	Scene.cpp Scene.hpp
+
+	Collision/CollisionDetector.hpp Collision/CollisionDetector.cpp
+)
+
+target_include_directories(${PROJECT_NAME}
+PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}
 )

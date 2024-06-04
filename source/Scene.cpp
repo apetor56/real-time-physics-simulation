@@ -5,6 +5,7 @@
 
 #include <ranges>
 #include <algorithm>
+#include <iostream>
 
 namespace RTPS {
 
@@ -22,6 +23,15 @@ void Scene::update( float deltaTime ) {
         if ( shape.has_value() )
             shape.value().update( deltaTime );
     } );
+    if ( m_collisionDetector.checkCollision( m_shapes.at( 0 ).value(), m_shapes.at( 1 ).value() ) ) {
+        m_shapes.at( 0 ).value().setFillColor( sf::Color{ 255, 0, 0 } );
+        m_shapes.at( 1 ).value().setFillColor( sf::Color{ 255, 0, 0 } );
+        m_shapes.at( 0 ).value().printPositions();
+        m_shapes.at( 1 ).value().printPositions();
+    } else {
+        m_shapes.at( 0 ).value().setFillColor( sf::Color{ 0, 255, 0 } );
+        m_shapes.at( 1 ).value().setFillColor( sf::Color{ 0, 255, 0 } );
+    }
 }
 
 void Scene::render( sf::RenderWindow& window ) const {
@@ -32,8 +42,10 @@ void Scene::render( sf::RenderWindow& window ) const {
 }
 
 void Scene::loadShapes() {
-    const std::vector< sf::Vector2f > firstTriangleVertices{ sf::Vector2f{ 100, 300 }, { 400, 150 }, { 200, 140 } };
-    const std::vector< sf::Vector2f > secondTriangleVertices{ sf::Vector2f{ 300, 400 }, { 600, 500 }, { 300, 300 } };
+    const std::vector< sf::Vector2f > firstTriangleVertices{
+        sf::Vector2f{ 436.363, 310.207 }, { 736.362, 290.207 }, { 356.363, 160.207 } };
+    const std::vector< sf::Vector2f > secondTriangleVertices{
+        sf::Vector2f{ 140.068, 315.215 }, { 340.068, 215.215 }, { 40.0681, 115.215 } };
 
     m_shapes.emplace_back( Shape( firstTriangleVertices ) );
     m_shapes.emplace_back( Shape( secondTriangleVertices ) );
