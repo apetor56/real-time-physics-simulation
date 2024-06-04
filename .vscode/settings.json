@@ -87,7 +87,11 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "xmemory0": "cpp",
+        "xstddef": "cpp",
+        "condition_variable": "cpp",
+        "shared_mutex": "cpp"
     },
     "editor.formatOnSave": true
 }

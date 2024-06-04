@@ -4,7 +4,7 @@ echo Pass the number to select your toolset:
 echo    Generator                Compiler
 echo 1) Visual Studio 17 2022    mvsc143,
 echo 2) Visual Studio 17 2022    clang-cl
-echo 3) MinGW Makefile           clang-cl
+echo 3) MinGW Makefile           clang++
 echo 4) MinGW Makefile           g++
 
 set /p userInput=
