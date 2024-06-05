@@ -6,7 +6,7 @@
 namespace RTPS {
 
 Application::Application( const WindowConfig& windowConfig )
-    : m_window{ sf::VideoMode{ sf::Vector2u{ windowConfig.width, windowConfig.height } }, windowConfig.name } {}
+    : m_window{ sf::VideoMode{ sf::Vector2u( windowConfig.width, windowConfig.height ) }, windowConfig.name } {}
 
 void Application::init() {
     m_window.setFramerateLimit( 60u );

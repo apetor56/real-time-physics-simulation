@@ -1,8 +1,14 @@
 #include "Application.hpp"
+#include "Config.hpp"
+
 #include <iostream>
 
+using namespace RTPS;
+
 int main() {
-    RTPS::Application application{ RTPS::WindowConfig{ 800, 600, "Collision Detection" } };
+    RTPS::Application application{
+        RTPS::WindowConfig{ config::window::width, config::window::height, config::window::name } };
+
     application.init();
 
     try {

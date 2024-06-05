@@ -9,9 +9,9 @@
 namespace RTPS {
 
 struct WindowConfig {
-    const uint32_t width;
-    const uint32_t height;
-    const std::string name;
+    const size_t width{};
+    const size_t height{};
+    const std::string name{};
 };
 
 class Application final {

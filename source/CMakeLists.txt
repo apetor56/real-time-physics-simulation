@@ -1,15 +1,27 @@
 add_executable(${PROJECT_NAME})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
-target_sources(${PROJECT_NAME}
-PRIVATE
+set(sources
 	main.cpp
+	Config.hpp
 	Application.cpp Application.hpp
 	Shape.cpp Shape.hpp
 	InputHandler.cpp InputHandler.hpp
 	Scene.cpp Scene.hpp
+	Math.hpp Math.cpp
+)
 
-	Collision/CollisionDetector.hpp Collision/CollisionDetector.cpp
+set(collision
+	Collision/CollisionDetector.cpp Collision/CollisionDetector.hpp
+	Collision/CollisionManager.cpp Collision/CollisionManager.hpp
+)
+
+source_group("Collision" FILES ${collision})
+
+target_sources(${PROJECT_NAME}
+PRIVATE
+	${sources}
+	${collision}
 )
 
 target_include_directories(${PROJECT_NAME}

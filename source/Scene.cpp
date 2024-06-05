@@ -7,10 +7,14 @@
 #include <algorithm>
 #include <iostream>
 
+#include "Math.hpp"
+
 namespace RTPS {
 
 Scene::Scene() {
     loadShapes();
+
+    std::ranges::for_each( m_shapes, [ this ]( auto& shape ) { m_collisionManager.addCollidable( shape.value() ); } );
 }
 
 void Scene::processInput( const InputHandler& inputHandler ) {
@@ -23,15 +27,8 @@ void Scene::update( float deltaTime ) {
         if ( shape.has_value() )
             shape.value().update( deltaTime );
     } );
-    if ( m_collisionDetector.checkCollision( m_shapes.at( 0 ).value(), m_shapes.at( 1 ).value() ) ) {
-        m_shapes.at( 0 ).value().setFillColor( sf::Color{ 255, 0, 0 } );
-        m_shapes.at( 1 ).value().setFillColor( sf::Color{ 255, 0, 0 } );
-        m_shapes.at( 0 ).value().printPositions();
-        m_shapes.at( 1 ).value().printPositions();
-    } else {
-        m_shapes.at( 0 ).value().setFillColor( sf::Color{ 0, 255, 0 } );
-        m_shapes.at( 1 ).value().setFillColor( sf::Color{ 0, 255, 0 } );
-    }
+
+    m_collisionManager.update( deltaTime );
 }
 
 void Scene::render( sf::RenderWindow& window ) const {
@@ -42,17 +39,18 @@ void Scene::render( sf::RenderWindow& window ) const {
 }
 
 void Scene::loadShapes() {
-    const std::vector< sf::Vector2f > firstTriangleVertices{
-        sf::Vector2f{ 436.363, 310.207 }, { 736.362, 290.207 }, { 356.363, 160.207 } };
-    const std::vector< sf::Vector2f > secondTriangleVertices{
-        sf::Vector2f{ 140.068, 315.215 }, { 340.068, 215.215 }, { 40.0681, 115.215 } };
+    const std::vector< sf::Vector2f > triangle{ sf::Vector2f{ 550, 20 }, { 570, 200 }, { 900, 250 } };
+    const std::vector< sf::Vector2f > rectangle{ sf::Vector2f{ 100, 200 }, { 300, 200 }, { 300, 500 }, { 100, 500 } };
+    const std::vector< sf::Vector2f > concave{
+        sf::Vector2f{ 500, 300 }, { 700, 330 }, { 800, 480 }, { 600, 370 }, { 520, 450 } };
+    const std::vector< sf::Vector2f > custom{ sf::Vector2f{ 700, 550 }, { 900, 550 }, { 1000, 750 }, { 800, 750 } };
 
-    m_shapes.emplace_back( Shape( firstTriangleVertices ) );
-    m_shapes.emplace_back( Shape( secondTriangleVertices ) );
+    m_shapes.emplace_back( Shape( triangle, sf::Color::Cyan ) );
+    m_shapes.emplace_back( Shape( rectangle, sf::Color::Magenta ) );
+    m_shapes.emplace_back( Shape( concave, sf::Color::Green ) );
+    m_shapes.emplace_back( Shape( custom, sf::Color::Blue ) );
 
     m_shapes.at( 0 )->setControlled( true );
-    m_shapes.at( 0 )->setFillColor( sf::Color{ 0, 255, 0 } );
-    m_shapes.at( 1 )->setFillColor( sf::Color{ 0, 0, 255 } );
 }
 
 void Scene::processShapeSwitch( const InputHandler& inputHandler ) {
