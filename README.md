@@ -26,7 +26,10 @@ If you use **g++** or **clang++** make sure you have **MinGW Makefiles** install
     3) MinGW Makefile           clang++
     4) MinGW Makefile           g++
     ```
-
+- when setup is done in root directory type 
+  ```bash
+  cmake --build build
+  ```
 Build can take a while.
 
 ---
