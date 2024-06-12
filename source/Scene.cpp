@@ -39,16 +39,18 @@ void Scene::render( sf::RenderWindow& window ) const {
 }
 
 void Scene::loadShapes() {
+    // lovely magic numbers <3
+
     const std::vector< sf::Vector2f > triangle{ sf::Vector2f{ 550, 20 }, { 570, 200 }, { 900, 250 } };
     const std::vector< sf::Vector2f > rectangle{ sf::Vector2f{ 100, 200 }, { 300, 200 }, { 300, 500 }, { 100, 500 } };
-    const std::vector< sf::Vector2f > concave{
-        sf::Vector2f{ 500, 300 }, { 700, 330 }, { 800, 480 }, { 600, 370 }, { 520, 450 } };
-    const std::vector< sf::Vector2f > custom{ sf::Vector2f{ 700, 550 }, { 900, 550 }, { 1000, 750 }, { 800, 750 } };
+    const std::vector< sf::Vector2f > custom21{
+        sf::Vector2f{ 500, 300 }, { 700, 330 }, { 800, 480 }, { 520, 450 } };
+    const std::vector< sf::Vector2f > custom2{ sf::Vector2f{ 700, 550 }, { 900, 550 }, { 1000, 750 }, { 800, 750 } };
 
     m_shapes.emplace_back( Shape( triangle, sf::Color::Cyan ) );
     m_shapes.emplace_back( Shape( rectangle, sf::Color::Magenta ) );
-    m_shapes.emplace_back( Shape( concave, sf::Color::Green ) );
-    m_shapes.emplace_back( Shape( custom, sf::Color::Blue ) );
+    m_shapes.emplace_back( Shape( custom21, sf::Color::Green ) );
+    m_shapes.emplace_back( Shape( custom2, sf::Color::Blue ) );
 
     m_shapes.at( 0 )->setControlled( true );
 }
